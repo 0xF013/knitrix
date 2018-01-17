@@ -1,0 +1,30 @@
+# Uncomment the model below as well
+
+type Canvas @model {
+  id: ID! @isUnique
+  title: String!
+
+  # Every relation also required a back-relation (to determine 1:1, 1:n or n:m)
+  author: User! @relation(name: "UserCanvases")
+}
+
+
+# added by facebook template: (please uncomment)
+type User @model {
+  # Required system field:
+  id: ID! @isUnique # read-only (managed by Graphcool)
+
+  # Optional system fields (remove if not needed):
+  createdAt: DateTime! # read-only (managed by Graphcool)
+  updatedAt: DateTime! # read-only (managed by Graphcool)
+
+  facebookUserId: String @isUnique
+  email: String # optional, because it's obtained from Facebook API
+  name: String
+  imageUrl: String
+
+  # custom fields
+  canvases: [Canvas!]! @relation(name: "UserCanvases")
+}
+
+
